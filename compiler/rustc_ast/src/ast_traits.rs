@@ -14,6 +14,7 @@ use crate::{
     Ty, Variant, Visibility,
 };
 
+// Commit diverging a
 /// A utility trait to reduce boilerplate.
 /// Standard `Deref(Mut)` cannot be reused due to coherence.
 pub trait AstDeref {
