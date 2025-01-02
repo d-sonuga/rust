@@ -22,16 +22,16 @@ jobs:
       
       - name: Sync
         run: |
-          #LATEST_COMMON_COMMIT=$(git merge-base master upstream/stable)
-          #STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream/master upstream/stable)
-          git checkout test-master
-          git checkout upstream-stable
-          git checkout upstream-master
-          LATEST_COMMON_COMMIT=$(git merge-base test-master upstream-stable)
-          STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream-master upstream-stable)
+          LATEST_COMMON_COMMIT=$(git merge-base master upstream/stable)
+          STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream/master upstream/stable)
+          #git checkout test-master
+          #git checkout upstream-stable
+          #git checkout upstream-master
+          #LATEST_COMMON_COMMIT=$(git merge-base test-master upstream-stable)
+          #STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream-master upstream-stable)
           if [ $LATEST_COMMON_COMMIT != $STABLE_MASTER_BASE_COMMIT ]
           then
-            git checkout test-master
+            git checkout master
             git merge $STABLE_MASTER_BASE_COMMIT
             if [ $? -ne 0 ]
             then
