@@ -29,7 +29,7 @@ jobs:
           git checkout upstream-master
           LATEST_COMMON_COMMIT=$(git merge-base test-master upstream-stable)
           STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream-master upstream-stable)
-          if [ $LATEST_COMMON_COMMIT -ne $STABLE_MASTER_BASE_COMMIT ]
+          if [ $LATEST_COMMON_COMMIT != $STABLE_MASTER_BASE_COMMIT ]
           then
             git checkout test-master
             git merge $STABLE_MASTER_BASE_COMMIT
