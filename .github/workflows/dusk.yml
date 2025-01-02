@@ -8,7 +8,7 @@ on:
     branches:
       - master
 
-name: Dusk Contract Compilers
+name: xDusk Contract Compilers
 
 jobs:
   target:
