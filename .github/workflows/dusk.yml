@@ -24,11 +24,12 @@ jobs:
         run: |
           #LATEST_COMMON_COMMIT=$(git merge-base master upstream/stable)
           #STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream/master upstream/stable)
-          LATEST_COMMON_COMMIT=$(git merge-base master upstream-stable)
+          git checkout upstream-stable
+          LATEST_COMMON_COMMIT=$(git merge-base test-master upstream-stable)
           STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream-master upstream-stable)
           if [ $LATEST_COMMON_COMMIT -ne $STABLE_MASTER_BASE_COMMIT ]
           then
-            git checkout master
+            git checkout test-master
             git merge $STABLE_MASTER_BASE_COMMIT
           else
             echo "Up to date"
