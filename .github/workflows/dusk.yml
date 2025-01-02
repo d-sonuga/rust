@@ -33,6 +33,7 @@ jobs:
           then
             git checkout test-master
             git merge $STABLE_MASTER_BASE_COMMIT
+            git push
           else
             echo "Up to date"
           fi
