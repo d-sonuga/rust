@@ -22,6 +22,7 @@ pub trait AstDeref {
     fn ast_deref_mut(&mut self) -> &mut Self::Target;
 }
 
+// A non conflicting commit
 macro_rules! impl_not_ast_deref {
     ($($T:ty),+ $(,)?) => {
         $(
