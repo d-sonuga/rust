@@ -3,7 +3,7 @@
 name: Dusk Sync
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '* 19 * * *'
   workflow_dispatch:
 
 jobs:
@@ -27,29 +27,22 @@ jobs:
 
       - name: Sync
         run: |
-          #LATEST_COMMON_COMMIT=$(git merge-base master upstream/stable)
-          #STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream/master upstream/stable)
-          git checkout upstream-diverged-stable
-          git checkout test-master
-          git merge upstream-diverged-stable
-          if [ $? -ne 0 ]
-          then
-            exit 1
-          fi
-          git push
+          LATEST_COMMON_COMMIT=$(git merge-base master upstream/stable)
+          STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream/master upstream/stable)
+          #git checkout test-master
           #git checkout upstream-stable
-          ##git checkout upstream-master
-          ##LATEST_COMMON_COMMIT=$(git merge-base test-master upstream-stable)
-          ##STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream-master upstream-stable)
-          #if [ $LATEST_COMMON_COMMIT != $STABLE_MASTER_BASE_COMMIT ]
-          #then
-            #git checkout master
-            #git merge $STABLE_MASTER_BASE_COMMIT
-            #if [ $? -ne 0 ]
-            #then
-              #exit 1
-            #fi
-            #git push
-          #else
-            #echo "Up to date"
-          #fi
+          #git checkout upstream-master
+          #LATEST_COMMON_COMMIT=$(git merge-base test-master upstream-stable)
+          #STABLE_MASTER_BASE_COMMIT=$(git merge-base upstream-master upstream-stable)
+          if [ $LATEST_COMMON_COMMIT != $STABLE_MASTER_BASE_COMMIT ]
+          then
+            git checkout master
+            git merge $STABLE_MASTER_BASE_COMMIT
+            if [ $? -ne 0 ]
+            then
+              exit 1
+            fi
+            git push
+          else
+            echo "Up to date"
+          fi
