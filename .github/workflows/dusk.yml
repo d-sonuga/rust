@@ -8,5 +8,7 @@ on:
 name: Dusk Sync
 
 jobs:
-  steps:
-    - echo "Ran a job"
+  Dusk-Sync:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Ran a job"
