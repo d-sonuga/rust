@@ -1,6 +1,7 @@
 # Instructions for GitHub to build Dusk's smart contract compilers.
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     tags:
