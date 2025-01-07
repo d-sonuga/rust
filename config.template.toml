@@ -1,7 +1,7 @@
 change-id = 125535
 
 [llvm]
-download-ci-llvm = "if-available"
+download-ci-llvm = true
 
 [build]
 host = [ "${HOST}" ]
