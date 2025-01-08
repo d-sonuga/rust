@@ -46,6 +46,7 @@ jobs:
         run: |
           git config --local --get-regex "remote\..*\.url"
           #git remote add upstream https://github.com/rust-lang/rust
+          echo "This is the number of commits in the repo: $(git rev-list --count HEAD)"
           ./x.py dist
 
       - name: Set artifact name
