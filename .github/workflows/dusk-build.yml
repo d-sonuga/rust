@@ -45,7 +45,7 @@ jobs:
       - name: Run build
         run: |
           git config --local --get-regex "remote\..*\.url"
-          git remote add upstream https://github.com/rust-lang/rust
+          #git remote add upstream https://github.com/rust-lang/rust
           ./x.py dist
 
       - name: Set artifact name
