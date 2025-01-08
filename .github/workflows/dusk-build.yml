@@ -15,11 +15,11 @@ jobs:
     strategy:
       matrix:
         target: [
-          x86_64-unknown-linux-gnu,
+          aarch64-apple-darwin,
         ]
         include:
-          - os: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
+          - os: macos-latest
+            target: aarch64-apple-darwin
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository
@@ -40,6 +40,7 @@ jobs:
       - name: Generate configuration
         run: |
           HOST=${{ matrix.target }} envsubst < config.template.toml > config.toml &&
+          echo "OS version: $(uname -v)"
           cat config.toml
 
       - name: Run build
