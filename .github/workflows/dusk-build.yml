@@ -25,7 +25,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 16
+          fetch-depth: 0
 
       - name: Setup dependencies
         if: matrix.os == 'ubuntu-latest'
@@ -45,7 +45,7 @@ jobs:
       - name: Run build
         run: |
           git config --local --get-regex "remote\..*\.url"
-          #git remote add upstream https://github.com/rust-lang/rust
+          git remote add upstream https://github.com/rust-lang/rust
           echo "This is the number of commits in the repo: $(git rev-list --count HEAD)"
           ./x.py dist
 
