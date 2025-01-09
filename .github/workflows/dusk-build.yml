@@ -15,11 +15,11 @@ jobs:
     strategy:
       matrix:
         target: [
-          aarch64-apple-darwin,
+          x86_64-apple-darwin,
         ]
         include:
           - os: macos-latest
-            target: aarch64-apple-darwin
+            target: x86_64-apple-darwin
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository
@@ -35,22 +35,7 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         run: |
           brew install ninja gettext &&
-          brew link --force gettext &&
-          brew install llvm
-
-      - name: Change cc and ar to wasm-supported versions
-        if: startsWith(matrix.os, 'macos')
-        run: |
-          LLVM_PATH=$(brew --prefix llvm)
-          echo "
-          [target.wasm32-unknown-unknown]
-          cc = \"$LLVM_PATH/bin/clang\"
-          ar = \"$LLVM_PATH/bin/llvm-ar\"
-
-          [target.wasm64-unknown-unknown]
-          cc = \"$LLVM_PATH/bin/clang\"
-          ar = \"$LLVM_PATH/bin/llvm-ar\"
-          " >> config.template.toml
+          brew link --force gettext
 
       - name: Generate configuration
         run: |
