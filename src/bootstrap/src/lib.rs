@@ -77,6 +77,8 @@ const LLD_FILE_NAMES: &[&str] = &["ld.lld", "ld64.lld", "lld-link", "wasm-ld"];
 #[allow(clippy::type_complexity)] // It's fine for hard-coded list and type is explained above.
 const EXTRA_CHECK_CFGS: &[(Option<Mode>, &str, Option<&[&'static str]>)] = &[
     (None, "bootstrap", None),
+    // #[cfg(bootstrap)] to be removed when Cargo is updated
+    (None, "test", None),
     (Some(Mode::Rustc), "llvm_enzyme", None),
     (Some(Mode::Codegen), "llvm_enzyme", None),
     (Some(Mode::ToolRustc), "llvm_enzyme", None),
@@ -1691,7 +1693,7 @@ Executed at: {executed_at}"#,
             }
         }
         if let Ok(()) = fs::hard_link(&src, dst) {
-            // Attempt to "easy copy" by creating a hard link (symlinks are priviledged on windows),
+            // Attempt to "easy copy" by creating a hard link (symlinks are privileged on windows),
             // but if that fails just fall back to a slow `copy` operation.
         } else {
             if let Err(e) = fs::copy(&src, dst) {
